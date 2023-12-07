@@ -44,5 +44,5 @@ func (g Game) IsPossibleWithCubes(cubes *ColourInput) bool {
 }
 
 func (g Game) GetPowerSet() int {
-	return g.MaxRed + g.MaxGreen + g.MaxBlue
+	return g.MaxRed * g.MaxGreen * g.MaxBlue
 }

@@ -69,6 +69,7 @@ func main() {
 	scanner := bufio.NewScanner(file)
 
 	possibleGames := []Game{}
+	allGames := []Game{}
 
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -80,6 +81,7 @@ func main() {
 		for _, element := range coloursText {
 			g.PassResults(ExtractColourInput(element))
 		}
+		allGames = append(allGames, *g)
 
 		testInput := &ColourInput{
 			R: 12,
@@ -92,5 +94,12 @@ func main() {
 		}
 	}
 
-	fmt.Println("The answer is:", SumGameIDs(possibleGames))
+	fmt.Println("The answer to part1 is:", SumGameIDs(possibleGames), "\n")
+
+	// PART 2
+	powerSetSum := 0
+	for _, game := range allGames {
+		powerSetSum += game.GetPowerSet()
+	}
+	fmt.Println("The answer to part 2 is:", powerSetSum)
 }
