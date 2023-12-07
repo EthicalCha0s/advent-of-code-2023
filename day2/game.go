@@ -1,32 +1,48 @@
 package main
 
 type Game struct {
-	MaxRed   int32
-	MaxGreen int32
-	MaxBlue  int32
+	ID       int
+	MaxRed   int
+	MaxGreen int
+	MaxBlue  int
 }
 
 type ColourInput struct {
-	R int32
-	G int32
-	B int32
+	R int
+	G int
+	B int
 }
 
 func (g *Game) PassResults(colours *ColourInput) {
-	if g.MaxRed > colours.R {
+	if g.MaxRed < colours.R {
 		g.MaxRed = colours.R
 	}
 
-	if g.MaxGreen > colours.G {
+	if g.MaxGreen < colours.G {
 		g.MaxGreen = colours.G
 	}
 
-	if g.MaxBlue > colours.B {
+	if g.MaxBlue < colours.B {
 		g.MaxBlue = colours.B
 	}
 }
 
-func (g Game) GetMinimumCubes() int32 {
-	sum := g.MaxRed + g.MaxGreen + g.MaxBlue
-	return sum
+func (g Game) IsPossibleWithCubes(cubes *ColourInput) bool {
+	if g.MaxRed > cubes.R {
+		return false
+	}
+
+	if g.MaxGreen > cubes.G {
+		return false
+	}
+
+	if g.MaxBlue > cubes.B {
+		return false
+	}
+
+	return true
+}
+
+func (g Game) GetPowerSet() int {
+	return g.MaxRed + g.MaxGreen + g.MaxBlue
 }
